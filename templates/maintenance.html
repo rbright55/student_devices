@@ -1,0 +1,67 @@
+<p></p>
+<button class="btn btn-warning" ng-show="ctickets" ng-click="showClosed()">
+<span class="glyphicon glyphicon-tags"></span> Show Closed Tickets
+</button>
+<button class="btn btn-success" ng-hide="ctickets" ng-click="showClosed()">
+<span class="glyphicon glyphicon-tags"></span> Show Active Tickets
+</button>
+<hr>
+<h3 >Add New Ticket:</h3>
+<form class="form-horizontal">
+  <div class="form-group">
+    <label class="col-sm-2 control-label">iPad #</label>
+    <div class="col-sm-4">
+      <input class="form-control" type="number" ng-model="did" placeholder="Device #">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Student ID:</label>
+    <div class="col-sm-4">
+      <input class="form-control" type="text" ng-model="serial" placeholder="Serial #">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Comment:</label>
+    <div class="col-sm-4">
+      <input class="form-control" type="text" ng-model="serial" placeholder="Serial #">
+    </div>
+  </div>
+</form>
+<hr>
+<button class="btn btn-success" ng-click="editDevice('new')">
+<span class="glyphicon glyphicon-user"></span>  Save New Ticket
+</button>
+<button class="btn btn-success" ng-click="editDevice('new')">
+<span class="glyphicon glyphicon-user"></span>  Add New Ticket
+</button>
+<hr>
+<div ng-show="ctickets"><h4>Active Tickets</h4></div>
+<div ng-hide="ctickets"><h4>Closed Tickets</h4></div>
+<input type="search" class="form-control" placeholder="Search for ticket" ng-model="searchQuery">
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Ticket #</th>
+      <th>Date</th>
+      <th>iPad #</th>
+      <th>Student</th>
+      <th>Comments</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="ticket in tickets  | filter:searchQuery" >
+      <td>
+        <button class="btn" ng-click="opentic(ticket)">
+        <span class="glyphicon glyphicon-pencil"></span>  View
+        </button>
+      </td>
+      <td>{{ ticket.Ticketnum }}</td>
+      <td>{{ ticket.date }}</td>
+      <td>{{ ticket.iPadnum }}</td>
+      <td>{{ ticket.student }}</td>
+      <td><button class="btn btn-success" ng-click="opentic(ticket)">{{ ticket.commentsnum }}</button></td>
+    </tr>
+  </tbody>
+</table>
+<hr>

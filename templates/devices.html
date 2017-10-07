@@ -1,0 +1,56 @@
+<h3 ng-show="edit">Add New Device:</h3>
+<h3 ng-hide="edit">Edit Device Info:</h3>
+<form class="form-horizontal">
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Device #:</label>
+    <div class="col-sm-4">
+      <input class="form-control" type="number" ng-model="did" placeholder="Device #">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Serial #:</label>
+    <div class="col-sm-4">
+      <input class="form-control" type="text" ng-model="serial" placeholder="Serial #">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Status:</label>
+    <div class="col-sm-4">
+      <select class="form-control" ng-model="dstatus" ng-change="updateStatus()">    
+        <option ng-repeat="stat in stats" value="{{stat.statusid}}" ng-selected="{{stat.statusid==statusid? true : false}}">{{stat.status}}</option>
+      </select>
+    </div>
+  </div>
+</form>
+<hr>
+<button class="btn btn-success" ng-disabled="incomplete" ng-click="addDevice()">
+<span class="glyphicon glyphicon-save"></span>  Save Changes
+</button>
+<button class="btn btn-success" ng-click="editDevice('new')">
+<span class="glyphicon glyphicon-user"></span>  Add New Device
+</button>
+<hr>
+<div class="col-xs-3 col-sm-3 col-md-3"><input class="form-control" type="search" placeholder="Search for device" ng-model="searchQuery"></div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Device #</th>
+      <th>Serial #</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="device in devices  | filter:searchQuery" >
+      <td>
+        <button class="btn" ng-click="editDevice($index)">
+        <span class="glyphicon glyphicon-pencil"></span>  Edit
+        </button>
+      </td>
+      <td>{{ device.did }}</td>
+      <td>{{ device.serial }}</td>
+      <td>{{ device.status }}</td>
+    </tr>
+  </tbody>
+</table>
+<hr>

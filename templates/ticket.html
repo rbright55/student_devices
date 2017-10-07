@@ -1,0 +1,50 @@
+<div class="modal-header bg-primary">
+    <h3 class="modal-title"><div class="row">
+        <div class="col-xs-8 col-sm-8 col-md-8">Ticket #{{tt.Ticketnum}}</div>
+        <div class="col-xs-4 col-sm-4 col-md-4 text-right">{{tt.date}}</div>
+    </div></h3>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-xs-8 col-sm-8 col-md-8"><h4>iPad #{{tt.iPadnum}}</h4></div>
+        <div class="col-xs-4 col-sm-4 col-md-4 text-right"><h4>{{tt.student}}</h4></div>
+    </div>
+    <div class="row">
+        <div class="col-xs-5 col-sm-3 col-md-2 bg-primary">
+            <select class="form-control" ng-model="dstatus" ng-change="updateStatus()">
+              <option ng-repeat="stat in stats" value="{{stat.statusid}}" ng-selected="{{stat.statusid==tt.status? true : false}}">{{stat.status}}</option>
+            </select>
+        </div>
+    </div>
+    <div id="commentbox">
+        <b>Comments</b>
+        </br>
+        <div class="input-group col-sm-8">
+            <input type="text" class="form-control" placeholder="details of maintenance" ng-model="newcomment">
+            <span class="input-group-btn"><button ng-click="addComment()" class="btn btn-success" type="button">Add Comment</button></span>
+        </div>
+        <div class="well well-lg">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Comment</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="comment in tt.comments  | filter:searchQuery"> 
+                        <td>{{ comment.date }}</td>
+                        <td>{{ comment.comment }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <div class="row">
+            <div ng-show="{{tt.open}}" class="col-xs-4 col-sm-4 col-md-4 text-left"><button class="btn btn-warning" ng-click="closeopenTicket(tt.open)">Close Ticket</button></div>
+            <div ng-hide="{{tt.open}}" class="col-xs-4 col-sm-4 col-md-4 text-left"><button class="btn btn-success" ng-click="closeopenTicket(tt.open)">Reopen Ticket</button></div>
+            <div class="col-xs-8 col-sm-8 col-md-8"><button class="btn btn-primary" ng-click="ok()">Save Changes</button></div>
+        </div>
+        
+    </div>

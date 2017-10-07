@@ -1,0 +1,86 @@
+<h3 ng-show="edit">Create New Student:</h3>
+<h3 ng-hide="edit">Edit Student:</h3>
+<form class="form-horizontal">
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Student ID:</label>
+    <div class="col-sm-2">
+      <input required class="form-control" type="text" ng-model="sid" placeholder="Student ID">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">First Name:</label>
+    <div class="col-sm-2">
+      <input required class="form-control" type="text" ng-model="fName" placeholder="First Name">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Last Name:</label>
+    <div class="col-sm-2">
+      <input required class="form-control" type="text" ng-model="lName" placeholder="Last Name">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Username:</label>
+    <div class="col-sm-2">
+      <input required class="form-control" type="text" ng-model="username" placeholder="Username">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Grade:</label>
+    <div class="col-sm-2">
+      <input required class="form-control" type="number" ng-model="grade" placeholder="Grade">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Homeroom:</label>
+    <div class="col-sm-2">
+      <input class="form-control" type="text" ng-model="homeroom" placeholder="Homeroom">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">iPad#:</label>
+    <div class="col-sm-2">
+      <input class="form-control" type="number" ng-model="ipadnum" placeholder="iPad#">
+    </div>
+  </div>
+</form>
+<hr>
+<button class="btn btn-success" ng-disabled="incomplete" ng-click="addStudent()">
+<span class="glyphicon glyphicon-save"></span>  Save Changes
+</button>
+<button class="btn btn-success" ng-click="editStudent('new')">
+<span class="glyphicon glyphicon-user"></span>  Create New Student
+</button>
+<hr>
+<div class="col-xs-3 col-sm-3 col-md-3"><input class="form-control" type="search" placeholder="Search for student" ng-model="searchQuery"></div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>ID</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Username</th>
+      <th>Grade</th>
+      <th>Homeroom</th>
+      <th>iPad#</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="student in students  | filter:searchQuery" >
+      <td>
+        <button class="btn" ng-click="editStudent($index)">
+        <span class="glyphicon glyphicon-pencil"></span>  Edit
+        </button>
+      </td>
+      <td>{{ student.sid }}</td>
+      <td>{{ student.fname }}</td>
+      <td>{{ student.lname }}</td>
+      <td>{{ student.username }}</td>
+      <td>{{ student.grade }}</td>
+      <td>{{ student.hroom }}</td>
+      <td>{{ student.ipadnum }}</td>
+    </tr>
+  </tbody>
+</table>
+<hr>
